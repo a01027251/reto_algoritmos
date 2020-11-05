@@ -102,4 +102,5 @@ int main()
     cout << "De las computadoras pertenecientes al dominio reto.com determina la cantidad de ips que tienen al menos una conexión entrante. " << endl;
     cout << "Cantidad de computadoras: " << contador << endl;
     cout << endl;
+    cout << endl;
 }
