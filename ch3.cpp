@@ -48,13 +48,13 @@ int main()
         {
             ConexionesComputadora conexion(ip, host, registros.All_Registrations);
             diccionario.insert(pair<string, ConexionesComputadora>(host, conexion));
-            cout << ip << endl;
+            // cout << ip << endl;
         }
         if (diccionario.find(host2) == diccionario.end())
         {
             ConexionesComputadora conexion(ip2, host2, registros.All_Registrations);
             diccionario.insert(pair<string, ConexionesComputadora>(host2, conexion));
-            cout << ip << endl;
+            // cout << ip << endl;
         }
     }
 
@@ -91,8 +91,8 @@ int main()
     {
         size_t host_last = it->first.find_first_of(".\\"); //devuelve el indice del ultimo punto de un ip
         string dominio = it->first.substr(host_last + 1, it->first.length() - 1);
-        cout << dominio << " " << it->second.get_conexiones_entrantes().size() << endl;
-        if (dominio == "reto.com" && it->second.get_conexiones_entrantes().size() < 100)
+        cout << dominio << " " << it->second.get_conexiones_salientes().size() << endl;
+        if (dominio == "reto.com" && it->second.get_conexiones_entrantes().size() > 0)
         {
 
             contador++;
@@ -102,5 +102,18 @@ int main()
     cout << "De las computadoras pertenecientes al dominio reto.com determina la cantidad de ips que tienen al menos una conexión entrante. " << endl;
     cout << "Cantidad de computadoras: " << contador << endl;
     cout << endl;
-    cout << endl;
+
+    cout << "PREGUNTA 4" << endl;
+    int contador2 = 0;
+    for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
+    {
+        size_t host_last = it->first.find_first_of(".\\"); //devuelve el indice del ultimo punto de un ip
+        string dominio = it->first.substr(host_last + 1, it->first.length() - 1);
+        cout << dominio << " " << it->second.get_conexiones_salientes().size() << endl;
+        if (host_last != "server.reto.com" && it->second.get_conexiones_entrantes().size() > 0)
+        {
+
+            contador2++;
+        }
+    }
 }
