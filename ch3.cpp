@@ -12,6 +12,7 @@ using namespace std;
 int main()
 {
     vector<string> dominios;
+    set<string> not_reto;
     vector<string> ip_dominios;
     vector<string> anomalos;
     DataBase<Linea> registros("nuevo4.csv", ',');
@@ -24,6 +25,14 @@ int main()
         string ip2 = registros.All_Registrations[i].ip2;
         string host = registros.All_Registrations[i].server;
         string host2 = registros.All_Registrations[i].web;
+
+        size_t host_last = host2.find_first_of(".\\"); //devuelve el indice del ultimo punto de un ip
+        string dominio = host2.substr(host_last + 1, host2.length() - 1);
+        if (dominio != "reto.com")
+        {
+            not_reto.insert(host2);
+        }
+
 
         if (counter != 1)
         {
