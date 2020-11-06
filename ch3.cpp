@@ -104,17 +104,15 @@ int main()
     cout << endl;
 
     cout << "PREGUNTA 4" << endl;
-    int contador2 = 0;
     set<string> ip_unique;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
         stack<Linea> stack(it->second.get_conexiones_entrantes());
         cout << it->first << endl;
-        while (stack.empty() == false)
+        while (!it->second.get_conexiones_entrantes().empty())
         {
-            cout << stack.top().ip2 << endl;
-            ip_unique.insert(stack.top().ip2);
-            stack.pop();
+            ip_unique.insert(it->second.get_conexiones_entrantes().top().ip2);
+            it->second.get_conexiones_entrantes().pop();
         }
     }
     for (auto ford_fiesta : ip_unique)
