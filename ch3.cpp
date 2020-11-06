@@ -108,14 +108,13 @@ int main()
     set<string> ip_unique;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
-        stack<Linea> stack (it->second.get_conexiones_entrantes()); 
-        cout<<it->first<<endl;
+        stack<Linea> stack(it->second.get_conexiones_entrantes());
+        cout << it->first << endl;
         while (stack.empty() == false)
         {
-            cout<<stack.top().ip2<<endl;
+            cout << stack.top().ip2 << endl;
             ip_unique.insert(stack.top().ip2);
             stack.pop();
-            
         }
     }
     for (auto ford_fiesta : ip_unique)
