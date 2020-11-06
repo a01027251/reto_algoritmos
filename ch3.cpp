@@ -6,6 +6,7 @@
 #include <sstream>
 #include <vector>
 #include <map>
+#include <set>
 using namespace std;
 
 int main()
@@ -103,18 +104,25 @@ int main()
     cout << endl;
 
     cout << "PREGUNTA 4" << endl;
-    // int contador2 = 0;
-    // for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
-    // {
-    //     size_t host_last = it->first.find_first_of(".\\"); //devuelve el indice del ultimo punto de un ip
-    //     string dominio = it->first.substr(host_last + 1, it->first.length() - 1);
-    //     cout << dominio << " " << it->second.get_conexiones_salientes().size() << endl;
-    //     if (host_last != "server.reto.com" && it->second.get_conexiones_entrantes().size() > 0)
-    //     {
-
-    //         contador2++;
-    //     }
-    // }
+    int contador2 = 0;
+    set<string> ip_unique;
+    for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
+    {
+        stack<Linea> stack (it->second.get_conexiones_entrantes()); 
+        cout<<it->first<<endl;
+        while (stack.empty() == false)
+        {
+            cout<<stack.top().ip2<<endl;
+            ip_unique.insert(stack.top().ip2);
+            stack.pop();
+            
+        }
+    }
+    for (auto ford_fiesta : ip_unique)
+    {
+        cout << ford_fiesta << endl;
+    }
+    cout << ip_unique.size() << endl;
     cout << endl;
     cout << "PREGUNTA 5" << endl;
     cout << "Despues de realizar las preguntas 3 y 4 podemos determinar que hay ataques de bots en la red ya que hay servidores que rompen con la norma de navegar en paginas desconocidas" << endl;
