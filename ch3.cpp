@@ -33,7 +33,6 @@ int main()
             not_reto.insert(host2);
         }
 
-
         if (counter != 1)
         {
             if (host2 == "3cgmaxmmtuo1ib6fr3fx.xxx")
@@ -99,10 +98,11 @@ int main()
     int contador = 0;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
+        stack<Linea>* stack_1(it->second.get_conexiones_entrantes());
         size_t host_last = it->first.find_first_of(".\\");
         string dominio = it->first.substr(host_last + 1, it->first.length() - 1);
         // cout << dominio << " " << it->second.get_conexiones_entrantes().size() << endl;
-        if (dominio == "reto.com" && it->second.get_conexiones_entrantes().size() > 0)
+        if (dominio == "reto.com" && stack_1->size() > 0)
         {
             contador++;
         }
@@ -112,16 +112,17 @@ int main()
     cout << "Cantidad de computadoras: " << contador << endl;
     cout << endl;
 
-    cout << "PREGUNTA 4" << endl;
+    cout << "PREGUNTA 4" << endl<<"Toma algunas computadoras que no sean server.reto.com o el servidor dhcp. Pueden ser entre 5 y 150. Obtén las ip únicas de las conexiones entrantes."<<endl;
     set<string> ip_unique;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
-        stack<Linea> stack(it->second.get_conexiones_entrantes());
+        stack<Linea>* stack_2(it->second.get_conexiones_entrantes());
         cout << it->first << endl;
-        while (!it->second.get_conexiones_entrantes().empty())
+        //cout<<it->second.get_ip()<<endl;
+        while (!stack_2->empty())
         {
-            ip_unique.insert(it->second.get_conexiones_entrantes().top().ip2);
-            it->second.get_conexiones_entrantes().pop();
+            ip_unique.insert(stack_2->top().ip2);
+            stack_2->pop();
         }
     }
     for (auto ford_fiesta : ip_unique)
@@ -130,6 +131,7 @@ int main()
     }
     cout << ip_unique.size() << endl;
     cout << endl;
+    
     cout << "PREGUNTA 5" << endl;
     cout << "Despues de realizar las preguntas 3 y 4 podemos determinar que hay ataques de bots en la red ya que hay servidores que rompen con la norma de navegar en paginas desconocidas" << endl;
 }

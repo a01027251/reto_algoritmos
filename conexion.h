@@ -15,8 +15,9 @@ private:
 
 public:
     /*aqui usamos gets para poder acceder a los atributos privados*/
-    stack<Linea> get_conexiones_entrantes() { return conexiones_entrantes; }
-    queue<Linea> get_conexiones_salientes() { return conexiones_salientes; }
+    stack<Linea>* get_conexiones_entrantes() { return &conexiones_entrantes; }
+    queue<Linea>* get_conexiones_salientes() { return &conexiones_salientes; }
+    string get_ip() {return ip;}
 
     ConexionesComputadora(string ip2, string nombre2, vector<Linea> archivo)
     {
