@@ -5,7 +5,7 @@
 
 using namespace std;
 
-template<class T>
+template <class T>
 #pragma once
 class DataBase
 {
@@ -32,7 +32,7 @@ public:
             getline(MyFile, port2, punctation_mark);
             getline(MyFile, hostname2, '\n');
 
-            All_Registrations.push_back(Linea(date, time, ip, hostname, ip2, hostname2, port , port2));
+            All_Registrations.push_back(Linea(date, time, ip, hostname, ip2, hostname2, port, port2));
 
             // The code below prints all the registrations
 
@@ -41,7 +41,38 @@ public:
             // i++;
         }
         MyFile.close();
-    };
-    ~DataBase(){};
+    }
 
+    map<string, int> conexionesPorDia(string fecha)
+    {
+        map<string, int> conteoFecha;
+        for (size_t i = 0; i < All_Registrations.size(); i++)
+
+        {
+            if (All_Registrations[i].date > fecha)
+            {
+                break;
+            }
+
+            else if (All_Registrations[i].date == fecha)
+            {
+                string host = All_Registrations[i].web;
+                size_t host_last = host.find_first_of(".\\");
+                string dominio = host.substr(host_last + 1, host.length() - 1);
+                if (conteoFecha.find(host) == conteoFecha.end() && dominio != "reto.com" && host != "-")
+                {
+
+                    conteoFecha.insert(pair<string, int>(host, 1));
+                }
+                else if (conteoFecha.find(host) != conteoFecha.end())
+                {
+
+                    conteoFecha[host]++;
+                }
+            }
+        }
+
+        return conteoFecha;
+    }
+    ~DataBase(){};
 };
