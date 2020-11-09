@@ -140,7 +140,8 @@ int main()
     cout << endl;
 
     cout << "PREGUNTA 5" << endl;
-    cout << "Despues de realizar las preguntas 3 y 4 podemos determinar que hay ataques de bots en la red ya que hay servidores que rompen con la norma de navegar en paginas desconocidas" << endl;
+    cout << "Despues de realizar las preguntas 3 y 4 podemos determinar que" << endl
+         << "todas las computadoras pertenecientes al dominio reto.com con conexion entrante no son server.reto.com ya que el total de estas 2 es el mismo" << endl;
 
     cout << endl;
     cout << "PREGUNTA 6" << endl;
