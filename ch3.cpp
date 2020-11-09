@@ -7,6 +7,7 @@
 #include <vector>
 #include <map>
 #include <set>
+#include "bst.h"
 using namespace std;
 
 int main()
@@ -160,8 +161,28 @@ int main()
         }
         if (encontrar == true)
         {
-            cout << "No se han comunicado con los servidores anomalos" << endl;
             break;
         }
     }
+     cout << endl;
+    cout << "PREGUNTA 7" << endl;
+    cout<<" En caso de que hayas encontrado que las computadoras del paso 1 y 4 se comunican, determina en qué fecha ocurre la primera comunicación entre estas 2 y qué protocolo se usó."<<endl;
+    
+    for (size_t i = 0; i < registros.All_Registrations.size() - 1; i++)
+    {
+        bool encontrar = false;
+        string ip2 = registros.All_Registrations[i].ip2;
+
+        while (ip2 != ip_dominios[0] || ip2 != ip_dominios[1])
+        {
+            cout<< "la fecha es : "<<registros.All_Registrations[i].date<<endl;
+            encontrar = true;
+            break;
+        }
+        if (encontrar == true)
+        {
+            break;
+        }
+    }
+
 }
