@@ -166,13 +166,14 @@ public:
         root = delete_node(root, val);
     };
 
-    void print_inorder(BTreeNode<T> *node)
+    void print_inorder(BTreeNode<T> *node) //de mayor a menor
     {
         if (node != NULL)
         {
-            print_inorder(node->get_left());
-            std::cout << node->get_val().second << ", ";
+
             print_inorder(node->get_right());
+            std::cout << node->get_val.first << " : " << node->get_val().second << ", ";
+            print_inorder(node->get_left());
         }
     };
 
@@ -199,6 +200,20 @@ public:
     void print_2D()
     {
         print_2D("", root, false);
+    }
+
+    void print_topN(BTreeNode<T> *node, vector<pair<string, int>> *vector_Top)
+    {
+        if (node != NULL)
+        {
+            print_topN(node->get_right(),vector_Top);
+            vector_Top->push_back(node->get_val());
+            print_topN(node->get_left(), vector_Top);
+        }
+    }
+    void print_topN(vector<pair<string, int>> *vector_Top)
+    {
+        print_topN(root,vector_Top);
     }
 };
 

@@ -3,6 +3,7 @@
 #include <fstream>
 #include "clase .h"
 #include "bst.h"
+#include <set>
 
 using namespace std;
 
@@ -76,16 +77,28 @@ public:
         return conteoFecha;
     }
 
-    void top(int n, string fecha)
+    vector<pair<string, int>> top(int n, string fecha)
     {
+        vector<pair<string, int>> vector_top;
         map<string, int> TopN = conexionesPorDia(fecha);
         BinarySearchTree<pair<string, int>> arbol;
         for (auto it : TopN)
         {
             arbol.insert_node(it);
         }
-        arbol.print_2D();
-        arbol.print_inorder();
+
+        arbol.print_topN(&vector_top);
+
+        vector<pair<string, int>> v_top(vector_top.begin(), vector_top.begin()+ n);
+
+        cout<<"el top "<< n<<" de la fecha: "<< fecha<< " es: "<<endl;
+        for (auto set_it : v_top)
+        {
+            cout<<set_it.first<< " : " <<set_it.second<<endl;
+        }
+        cout<<endl;
+        
+        return v_top;
     }
     ~DataBase(){};
 };
