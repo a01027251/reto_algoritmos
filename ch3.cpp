@@ -159,6 +159,7 @@ int main()
         }
         if (encontrar == true)
         {
+            cout << "No se han comunicado con los servidores anomalos" << endl;
             break;
         }
     }
