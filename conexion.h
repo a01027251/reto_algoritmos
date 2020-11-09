@@ -15,9 +15,9 @@ private:
 
 public:
     /*aqui usamos gets para poder acceder a los atributos privados*/
-    stack<Linea>* get_conexiones_entrantes() { return &conexiones_entrantes; }
-    queue<Linea>* get_conexiones_salientes() { return &conexiones_salientes; }
-    string get_ip() {return ip;}
+    stack<Linea> *get_conexiones_entrantes() { return &conexiones_entrantes; }
+    queue<Linea> *get_conexiones_salientes() { return &conexiones_salientes; }
+    string get_ip() { return ip; }
 
     ConexionesComputadora(string ip2, string nombre2, vector<Linea> archivo)
     {
@@ -29,13 +29,13 @@ public:
             //stack
             if (archivo[i].ip2 == ip)
             {
-                conexiones_salientes.push(archivo[i]);
+                conexiones_entrantes.push(archivo[i]);
             }
 
             //queue
             if (archivo[i].ip == ip)
             {
-                conexiones_entrantes.push(archivo[i]);
+                conexiones_salientes.push(archivo[i]);
             }
         }
     };

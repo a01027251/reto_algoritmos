@@ -40,17 +40,17 @@ int main()
         }
     }
 
-    map<string, int> conteoFecha;
-    DataBase<Linea> registros("nuevo4.csv", ',');
-    string fecha;
-    int contador = 0;
-    int conexionesPorDia(string fecha)
-    {
-        if (conteoFecha.find(fecha) == conteoFecha.end())
-        {
-            conteoFecha conteo(web, contador, registros.All_Registrations);
-            conexionesPorDia.insert(pair<string, int>(web, contador));
-        }
-    }
-}
+//     map<string, int> conteoFecha;
+//     DataBase<Linea> registros("nuevo4.csv", ',');
+//     string fecha;
+//     int contador = 0;
+//     int conexionesPorDia(string fecha)
+//     {
+//         if (conteoFecha.find(fecha) == conteoFecha.end())
+//         {
+//             conteoFecha conteo(web, contador, registros.All_Registrations);
+//             conexionesPorDia.insert(pair<string, int>(web, contador));
+//         }
+//     }
+// }
 }

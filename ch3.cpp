@@ -53,13 +53,13 @@ int main()
             }
         }
 
-        if (diccionario.find(host) == diccionario.end())
+        if (diccionario.find(host) == diccionario.end() && ip != "-")
         {
             ConexionesComputadora conexion(ip, host, registros.All_Registrations);
             diccionario.insert(pair<string, ConexionesComputadora>(host, conexion));
             // cout << ip << endl;
         }
-        if (diccionario.find(host2) == diccionario.end())
+        if (diccionario.find(host2) == diccionario.end() && ip2 != "-")
         {
             ConexionesComputadora conexion(ip2, host2, registros.All_Registrations);
             diccionario.insert(pair<string, ConexionesComputadora>(host2, conexion));
@@ -98,7 +98,7 @@ int main()
     int contador = 0;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
-        stack<Linea>* stack_1(it->second.get_conexiones_entrantes());
+        stack<Linea> *stack_1(it->second.get_conexiones_entrantes());
         size_t host_last = it->first.find_first_of(".\\");
         string dominio = it->first.substr(host_last + 1, it->first.length() - 1);
         // cout << dominio << " " << it->second.get_conexiones_entrantes().size() << endl;
@@ -112,26 +112,41 @@ int main()
     cout << "Cantidad de computadoras: " << contador << endl;
     cout << endl;
 
-    cout << "PREGUNTA 4" << endl<<"Toma algunas computadoras que no sean server.reto.com o el servidor dhcp. Pueden ser entre 5 y 150. Obtén las ip únicas de las conexiones entrantes."<<endl;
+    cout << "PREGUNTA 4" << endl
+         << "Toma algunas computadoras que no sean server.reto.com o el servidor dhcp. Pueden ser entre 5 y 150. Obtén las ip únicas de las conexiones entrantes." << endl;
     set<string> ip_unique;
     for (map<string, ConexionesComputadora>::iterator it = diccionario.begin(); it != diccionario.end(); ++it)
     {
-        stack<Linea>* stack_2(it->second.get_conexiones_entrantes());
-        cout << it->first << endl;
+        stack<Linea> *stack_2(it->second.get_conexiones_entrantes());
+        // cout << it->first << endl;
         //cout<<it->second.get_ip()<<endl;
         while (!stack_2->empty())
         {
-            ip_unique.insert(stack_2->top().ip2);
+            Linea gol = stack_2->top();
+            if (gol.server != "server.reto.com" && gol.ids != "68")
+            {
+                ip_unique.insert(gol.ip);
+            }
+
             stack_2->pop();
         }
     }
+    cout << "ips unicas: " << endl;
     for (auto ford_fiesta : ip_unique)
     {
         cout << ford_fiesta << endl;
     }
-    cout << ip_unique.size() << endl;
+    cout << "Total = " << ip_unique.size() << endl;
     cout << endl;
-    
+
     cout << "PREGUNTA 5" << endl;
     cout << "Despues de realizar las preguntas 3 y 4 podemos determinar que hay ataques de bots en la red ya que hay servidores que rompen con la norma de navegar en paginas desconocidas" << endl;
+
+    cout << endl;
+    cout << "PREGUNTA 6" << endl;
+    for (auto )
+    {
+        /* code */
+    }
+    
 }
