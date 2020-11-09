@@ -2,6 +2,7 @@
 #include <map>
 #include <fstream>
 #include "clase .h"
+#include "bst.h"
 
 using namespace std;
 
@@ -73,6 +74,18 @@ public:
         }
 
         return conteoFecha;
+    }
+
+    void top(int n, string fecha)
+    {
+        map<string, int> TopN = conexionesPorDia(fecha);
+        BinarySearchTree<pair<string, int>> arbol;
+        for (auto it : TopN)
+        {
+            arbol.insert_node(it);
+        }
+        arbol.print_2D();
+        arbol.print_inorder();
     }
     ~DataBase(){};
 };

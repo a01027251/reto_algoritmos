@@ -17,10 +17,15 @@ int counts = 0;
 int main()
 {
     DataBase<Linea> registros("nuevo4.csv", ',');
-    map<string,int> hola = registros.conexionesPorDia("10-8-2020");
-    for (auto dichi : hola)
-    {
-        cout << dichi.first<<" : "<<dichi.second<<endl;
-    }
+    // map<string,int> hola = registros.conexionesPorDia("10-8-2020");
+    // for (auto dichi : hola)
+    // {
+    //     cout << dichi.first<<" : "<<dichi.second<<endl;
+
+    // }
+
+    registros.top(3,"10-8-2020");
+
+    
     
 }
