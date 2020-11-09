@@ -144,9 +144,22 @@ int main()
 
     cout << endl;
     cout << "PREGUNTA 6" << endl;
-    for (auto )
+    cout << "Para las ips encontradas en el paso anterior, determina si se han comunicado con los datos encontrados en la pregunta 1." << endl;
+
+    for (size_t i = 0; i < registros.All_Registrations.size() - 1; i++)
     {
-        /* code */
+        bool encontrar = false;
+        string ip2 = registros.All_Registrations[i].ip2;
+
+        while (ip2 != ip_dominios[0] || ip2 != ip_dominios[1])
+        {
+            cout << "Si se han comunicado con los servidores anomalos" << endl;
+            encontrar = true;
+            break;
+        }
+        if (encontrar == true)
+        {
+            break;
+        }
     }
-    
 }
