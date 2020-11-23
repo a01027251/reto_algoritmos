@@ -11,11 +11,11 @@
 #include <map>
 
 using namespace std;
-int main(int argc, char const *argv[])
+int main()
 {
 
     DataBase<Linea> registros("nuevo4.csv", ',');
-    Graph<string> graphA;
+    Graph<T> graphA;
     set<string> ipEntrante;
 
     for (int i = 0; i < registros.All_Registrations.size() - 1; i++)
@@ -24,9 +24,9 @@ int main(int argc, char const *argv[])
         ipEntrante.insert(ip);
     }
     ipEntrante.erase("-");
-}
 
-// for (auto fiat : ipEntrante)
-// {
-//     cout << fiat << endl;
-// }
+    for (int i = 0; i < ipEntrante.size(); i++)
+    {
+        graphA.add_node(ipEntrante);
+    }
+}
