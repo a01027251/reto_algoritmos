@@ -5,7 +5,7 @@ El reto de evidencias de aprendizaje #2 se relaciona con los temas vistos en cla
 Trabajamos con el fichero presentado en clase y creamos un vector con las IP para encontrar las conexiones entrantes y salientes de un serviodor
 Relizamos investigación para aprender el funcionamiento de nuevas funciones y poder hacer que este programa sea generico
 */
-#include "conexion.h"
+#include "conexion.h.icloud"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -35,7 +35,8 @@ int main()
             getline(archivo, server, ',');
             getline(archivo, ip2, ',');
             getline(archivo, ids2, ',');
-            getline(archivo, web, '\n');
+            getline(archivo, web, '
+');
             Linea o1(date, hour, ip, server, ip2, web, ids, ids2);
             archivo2.push_back(o1);
         }
@@ -61,7 +62,7 @@ int main()
     }
 
     ipc = archivo2[i].ip;
-    int ultimo_punto = ipc.find_last_of(".\\"); //devuelve el indice del ultimo punto de un ip
+    int ultimo_punto = ipc.find_last_of(".\"); //devuelve el indice del ultimo punto de un ip
 
     ipt = ipc.substr(0, ultimo_punto + 1) + to_string(num);
 

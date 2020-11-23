@@ -89,7 +89,7 @@ public:
 
         arbol.print_topN(&vector_top);
 
-        vector<pair<string, int>> v_top(vector_top.begin(), vector_top.begin()+ n);
+        vector<pair<string, int> > v_top(vector_top.begin(), vector_top.begin()+ n);
 
         cout<<"el top "<< n<<" de la fecha: "<< fecha<< " es: "<<endl;
         for (auto set_it : v_top)
