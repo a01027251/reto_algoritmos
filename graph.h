@@ -6,7 +6,6 @@
 #include <vector>
 #include <queue>
 #include <stack>
-#include <algorithm>
 
 template <class T>
 class GraphVertex
@@ -17,7 +16,9 @@ private:
 public: 
     ~GraphVertex() {};
     GraphVertex() {};
-    GraphVertex(T _val) {val = _val;};
+    GraphVertex(T _val) {
+        val = _val;
+    };
 
     T get_val() {return val;};
     void set_val(T _val) {val = _val;};
@@ -25,13 +26,6 @@ public:
     std::vector<int> get_adj() {return adj;};
     void add_to_adj(int idx) {adj.push_back(idx);};
 };
-
-// A B C D E F G H
-// 0 1 2 3 4 5 6 7
-// Lista adj a: 1, 2, 3
-// Lista adj b: 0
-// Lista adj c: 0, 3
-
 
 template <class T>
 class Graph
@@ -43,6 +37,8 @@ private:
 public:
     ~Graph() {};
     Graph() {is_directed=false;};
+
+    std::vector<GraphVertex<T>> get_nodes(){return nodes;}
 
     void add_node(T val)
     {
@@ -59,106 +55,78 @@ public:
 
     void BFS(int start_vertex)
     {
-        std::vector<int> visited;
-        std::queue<int> searching;
-        std::vector<int> temp;
-        bool condition = true;
-        do
-        {
-            if(condition)
-            {
-                std::cout<<nodes[start_vertex].get_val()<<" ";
-                temp = nodes[start_vertex].get_adj();
-                for(int i = 0; i < temp.size(); i++)
-                {
-                    searching.push(temp[i]);
-                }
-                visited.push_back(start_vertex);
-                start_vertex = searching.front();
-                searching.pop();
-                for(int i = 0; i < visited.size(); i++)
-                {
-                    if(visited[i]==start_vertex)
-                    {
-                        condition = false;
-                        i = visited.size();
-                    }
-                    else condition = true;
-                }
-            }
-            else
-            {
-                start_vertex = searching.front();
-                searching.pop();
-                for(int i = 0; i < visited.size(); i++)
-                {
-                    if(visited[i]==start_vertex)
-                    {
-                        condition = false;
-                        i = visited.size();
-                    }
-                    else condition = true;
-                }
-            }
-            
-
-        } while (searching.empty() != true);
+        // Create vector for visited flag
+        std::vector<bool> visited(nodes.size(), false);
         
+        // Create a queue for BFS 
+        std::queue<int> queue;
+    
+        // Mark the current node as visited and enqueue it 
+        visited[start_vertex] = true; 
+        queue.push(start_vertex);
+            
+        while(!queue.empty()) 
+        { 
+            // Dequeue a vertex from queue and print it 
+            int s = queue.front(); 
+            // Do something with the vertex
+            std::cout << nodes[s].get_val() << " "; 
+            queue.pop(); 
+    
+            // Get all adjacent vertices of the dequeued 
+            // vertex s. If a adjacent has not been visited,  
+            // then mark it visited and enqueue it 
+            for (std::vector<int>::iterator i = nodes[s].get_adj().begin(); 
+                i != nodes[s].get_adj().end(); ++i) 
+            { 
+                if (!visited[*i]) 
+                { 
+                    visited[*i] = true; 
+                    queue.push(*i); 
+                } 
+            }
+        } 
+        std::cout << std::endl;
     };
 
     void DFS(int start_vertex)
     {
-        std::vector<int> visited;
-        std::stack<int> searching;
-        std::vector<int> temp;
-        bool condition = true;
-        do
-        {
-            if(condition)
-            {
-                std::cout<<nodes[start_vertex].get_val()<<" ";
-                temp = nodes[start_vertex].get_adj();
-                for(int i = 0; i < temp.size(); i++)
-                {
-                    searching.push(temp[i]);
-                }
-                visited.push_back(start_vertex);
-                start_vertex = searching.top();
-                searching.pop();
-                for(int i = 0; i < visited.size(); i++)
-                {
-                    if(visited[i]==start_vertex)
-                    {
-                        condition = false;
-                        i = visited.size();
-                    }
-                    else condition = true;
-                }
-            }
-            else
-            {
-                start_vertex = searching.top();
-                searching.pop();
-                for(int i = 0; i < visited.size(); i++)
-                {
-                    if(visited[i]==start_vertex)
-                    {
-                        condition = false;
-                        i = visited.size();
-                    }
-                    else
-                    {
-                        condition = true;
-                        searching.push(0);
-                    }
-                }
-            }
-            
-
-        } while (searching.empty() != true);
-
+        // Create vector for visited flag
+        std::vector<bool> visited(nodes.size(), false);
         
-    }
+        // Create a stack for DFS 
+        std::stack<int> stack;
+
+        stack.push(start_vertex);
+    
+            
+        while(!stack.empty()) 
+        { 
+            // Dequeue a vertex from queue and print it 
+            int s = stack.top();
+            stack.pop();
+
+            if (!visited[s])
+            {            
+                visited[s] = true;
+                // Do something with the vertex
+                std::cout << nodes[s].get_val() << " "; 
+            }
+
+            // Get all adjacent vertices of the dequeued 
+            // vertex s. If a adjacent has not been visited,  
+            // then mark it visited and enqueue it 
+            for (std::vector<int>::iterator i = nodes[s].get_adj().begin(); 
+                i != nodes[s].get_adj().end(); ++i) 
+            { 
+                if (!visited[*i]) 
+                { 
+                    stack.push(*i); 
+                } 
+            }
+        } 
+        std::cout << std::endl;
+    };
 };
 
 #endif
