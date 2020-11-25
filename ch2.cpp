@@ -62,7 +62,7 @@ int main()
     }
 
     ipc = archivo2[i].ip;
-    int ultimo_punto = ipc.find_last_of(".\"); //devuelve el indice del ultimo punto de un ip
+    int ultimo_punto = ipc.find_last_of(".\\"); //devuelve el indice del ultimo punto de un ip
 
     ipt = ipc.substr(0, ultimo_punto + 1) + to_string(num);
 
