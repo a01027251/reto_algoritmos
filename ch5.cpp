@@ -34,7 +34,7 @@ int main()
     for (auto it : setFecha)
     {
         graphFechas.add_node(it);
-        cout << it << "-----" << cont << endl;
+        // cout << it << "-----" << cont << endl;
         cont++;
     }
 
@@ -48,7 +48,7 @@ int main()
     for (auto it : ipEntrante)
     {
         graphFechas.add_node(it);
-        cout << it << "-----" << cont << endl;
+        // cout << it << "-----" << cont << endl;
         cont++;
     }
 
@@ -60,7 +60,7 @@ int main()
 
     string ipc = registros.All_Registrations[k].ip;
     int ultimo_punto = ipc.find_last_of(".\\");
-    string ipj = ipc.substr(0,ultimo_punto + 1);
+    string ipj = ipc.substr(0, ultimo_punto + 1);
 
     int c = 0;
     for (int i = 1; i < registros.All_Registrations.size() - 1; i++)
@@ -74,8 +74,8 @@ int main()
 
         string ipk = registros.All_Registrations[i].ip2;
         int ultimo = ipk.find_last_of(".\\");
-        string ipt = ipc.substr( 0 ,ultimo + 1);
-        
+        string ipt = ipk.substr(0, ultimo + 1);
+
         //cout << i << endl;
 
         if (a != b)
@@ -84,25 +84,32 @@ int main()
             {
 
                 vectror_grafos[c].add_node(partes);
-                cout << partes << "--" << c << endl;
+                // cout << partes << "--" << c << endl;
             }
 
-            set<string> setFechaIntermitente;
-            cout << a << "--" << b << "--" << c << endl;
+            setFechaIntermitente.clear();
+            // cout << a << "--" << b << "--" << c << endl;
             c++;
         }
         setFechaIntermitente.insert(ip);
-      
 
         if (ipj == ipt)
         {
-            
+
             setFechaIntermitente.insert(ip2);
-             cout<< ipj<< "--"<<ipt<<endl;
 
+            // cout << ipj << "--" << ipt << endl;
         }
-        
-        
     }
+    for (size_t i = 0; i < vectror_grafos.size(); i++)
+    {
+        vector<GraphVertex<string>> vector_ip = vectror_grafos[i].get_nodes();
 
+        for (auto it_vector : vector_ip)
+        {
+            cout << it_vector.get_val() << endl;
+        }
+        cout << "lenght: " << vector_ip.size() << endl;
+        cout << endl;
+    }
 }
