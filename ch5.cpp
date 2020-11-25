@@ -17,7 +17,6 @@ int main()
 {
 
     DataBase<Linea> registros("nuevo4.csv", ',');
-    Graph<string> graphFechas;
     set<string> ipEntrante;
     set<string> setFecha;
     set<string> setFechaIntermitente;
@@ -31,26 +30,12 @@ int main()
         setFecha.insert(fecha);
     }
 
-    for (auto it : setFecha)
-    {
-        graphFechas.add_node(it);
-        // cout << it << "-----" << cont << endl;
-        cont++;
-    }
-
     for (int i = 0; i < registros.All_Registrations.size() - 1; i++)
     {
         string ip = registros.All_Registrations[i].ip;
         ipEntrante.insert(ip);
     }
     ipEntrante.erase("-");
-
-    for (auto it : ipEntrante)
-    {
-        graphFechas.add_node(it);
-        // cout << it << "-----" << cont << endl;
-        cont++;
-    }
 
     int k = 0;
     while (registros.All_Registrations[k].ip == "-") //recorre el archivo hasta llegar a un ip existente
@@ -108,8 +93,10 @@ int main()
         for (auto it_vector : vector_ip)
         {
             cout << it_vector.get_val() << endl;
-        }
+            vectror_grafos[i].add_edge(find(vector_ip.begin(),vector_ip.end(), ), find(vector_ip.begin(),vector_ip.end(),))
+        }   
         cout << "lenght: " << vector_ip.size() << endl;
         cout << endl;
     }
+
 }
