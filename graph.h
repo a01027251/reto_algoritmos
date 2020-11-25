@@ -36,7 +36,7 @@ private:
 
 public:
     ~Graph() {};
-    Graph() {is_directed=false;};
+    Graph() {is_directed=true;};
 
     std::vector<GraphVertex<T>> get_nodes(){return nodes;}
 
