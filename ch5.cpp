@@ -84,9 +84,9 @@ int main()
         }
     }
     int dia = 1;
-    string ip_seleccion = "192.168.188.54";
-    // cout << "Selecciona la ip a buscar" << endl;
-    // cin >> ip_seleccion;
+    string ip_seleccion;
+    cout << "Selecciona la ip a buscar" << endl;
+     cin >> ip_seleccion;
 
     for (size_t i = 0; i < vectror_grafos.size(); i++)
     {
@@ -164,6 +164,8 @@ int main()
 
         vectror_grafos[i].conteo_inversa(ip_anomalo);
         vectror_grafos[i].conteo_inversa(ip_conexion_anomala);
+
+        
         cout << endl;
     }
 }
