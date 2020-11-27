@@ -1,7 +1,7 @@
 #ifndef _GRAPH_H_
 #define _GRAPH_H_
 
-#include<iostream> 
+#include <iostream>
 #include <list>
 #include <vector>
 #include <queue>
@@ -14,16 +14,17 @@ class GraphVertex
 private:
     T val;
     std::vector<int> adj;
-public: 
-    ~GraphVertex() {};
-    GraphVertex() {};
-    GraphVertex(T _val) {val = _val;};
 
-    T get_val() {return val;};
-    void set_val(T _val) {val = _val;};
+public:
+    ~GraphVertex(){};
+    GraphVertex(){};
+    GraphVertex(T _val) { val = _val; };
 
-    std::vector<int> get_adj() {return adj;};
-    void add_to_adj(int idx) {adj.push_back(idx);};
+    T get_val() { return val; };
+    void set_val(T _val) { val = _val; };
+
+    std::vector<int> get_adj() { return adj; };
+    void add_to_adj(int idx) { adj.push_back(idx); };
 };
 
 // A B C D E F G H
@@ -32,20 +33,18 @@ public:
 // Lista adj b: 0
 // Lista adj c: 0, 3
 
-
 template <class T>
 class Graph
 {
 private:
-    std::vector<GraphVertex<T> > nodes;
+    std::vector<GraphVertex<T>> nodes;
     bool is_directed;
 
 public:
-    ~Graph() {};
-    Graph() {is_directed=true;};
-     std::vector<GraphVertex<T>> get_nodes(){return nodes;}
+    ~Graph(){};
+    Graph() { is_directed = true; };
+    std::vector<GraphVertex<T>> get_nodes() { return nodes; }
 
-    
     void add_node(T val)
     {
         GraphVertex<T> node(val);
@@ -69,15 +68,27 @@ public:
             if (src == nodes[i].get_val())
             {
                 src_idx = i;
-            }  
+            }
 
             if (dst == nodes[i].get_val())
             {
                 dst_idx = i;
-            }  
+            }
         }
-        nodes[src_idx].add_to_adj(dst_idx);     
-        
+        bool x = true;
+
+        for (auto node : nodes[src_idx].get_adj())
+        {
+            if (node == dst_idx)
+            {
+                x = false;
+            }
+        }
+
+        if (x == true)
+        {
+            nodes[src_idx].add_to_adj(dst_idx);
+        }
     };
 
     void BFS(int start_vertex)
@@ -88,45 +99,45 @@ public:
         bool condition = true;
         do
         {
-            if(condition)
+            if (condition)
             {
-                std::cout<<nodes[start_vertex].get_val()<<" ";
+                std::cout << nodes[start_vertex].get_val() << " ";
                 temp = nodes[start_vertex].get_adj();
-                for(int i = 0; i < temp.size(); i++)
+                for (int i = 0; i < temp.size(); i++)
                 {
                     searching.push(temp[i]);
                 }
                 visited.push_back(start_vertex);
                 start_vertex = searching.front();
                 searching.pop();
-                for(int i = 0; i < visited.size(); i++)
+                for (int i = 0; i < visited.size(); i++)
                 {
-                    if(visited[i]==start_vertex)
+                    if (visited[i] == start_vertex)
                     {
                         condition = false;
                         i = visited.size();
                     }
-                    else condition = true;
+                    else
+                        condition = true;
                 }
             }
             else
             {
                 start_vertex = searching.front();
                 searching.pop();
-                for(int i = 0; i < visited.size(); i++)
+                for (int i = 0; i < visited.size(); i++)
                 {
-                    if(visited[i]==start_vertex)
+                    if (visited[i] == start_vertex)
                     {
                         condition = false;
                         i = visited.size();
                     }
-                    else condition = true;
+                    else
+                        condition = true;
                 }
             }
-            
 
         } while (searching.empty() != true);
-        
     };
 
     void DFS(int start_vertex)
@@ -137,34 +148,35 @@ public:
         bool condition = true;
         do
         {
-            if(condition)
+            if (condition)
             {
-                std::cout<<nodes[start_vertex].get_val()<<" ";
+                std::cout << nodes[start_vertex].get_val() << " ";
                 temp = nodes[start_vertex].get_adj();
-                for(int i = 0; i < temp.size(); i++)
+                for (int i = 0; i < temp.size(); i++)
                 {
                     searching.push(temp[i]);
                 }
                 visited.push_back(start_vertex);
                 start_vertex = searching.top();
                 searching.pop();
-                for(int i = 0; i < visited.size(); i++)
+                for (int i = 0; i < visited.size(); i++)
                 {
-                    if(visited[i]==start_vertex)
+                    if (visited[i] == start_vertex)
                     {
                         condition = false;
                         i = visited.size();
                     }
-                    else condition = true;
+                    else
+                        condition = true;
                 }
             }
             else
             {
                 start_vertex = searching.top();
                 searching.pop();
-                for(int i = 0; i < visited.size(); i++)
+                for (int i = 0; i < visited.size(); i++)
                 {
-                    if(visited[i]==start_vertex)
+                    if (visited[i] == start_vertex)
                     {
                         condition = false;
                         i = visited.size();
@@ -176,11 +188,8 @@ public:
                     }
                 }
             }
-            
 
         } while (searching.empty() != true);
-
-        
     }
 
     void print_edge()
@@ -197,18 +206,37 @@ public:
         }
     }
 
-    void print_conteo()
+    void print_conteo(string ip)
     {
-        
+
         int cont = 0;
         for (auto node : nodes)
         {
 
-            // cout<<node.get_adj().size()<<endl;
-            cont=node.get_adj().size();
-            cout<< "cont "<<cont<<endl;
-
+            if (node.get_val() == ip)
+            {
+                // cout<<node.get_adj().size()<<endl;
+                cont = node.get_adj().size();
+                cout << "Numero de conexiones Salientes: " << cont << endl;
+            }
         }
+    }
+
+    void conteo_inversa(string ip)
+    {
+        int contador = 0;
+        for (auto node : nodes)
+        {
+
+            for (auto pablito : node.get_adj())
+            {
+                if (nodes[pablito].get_val() == ip)
+                {
+                    contador++;
+                }
+            }
+        }
+        cout << "Numero de conexiones entrantes: " << contador << endl;
     }
 };
 
