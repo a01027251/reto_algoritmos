@@ -196,6 +196,20 @@ public:
             cout << endl;
         }
     }
+
+    void print_conteo()
+    {
+        
+        int cont = 0;
+        for (auto node : nodes)
+        {
+
+            // cout<<node.get_adj().size()<<endl;
+            cont=node.get_adj().size();
+            cout<< "cont "<<cont<<endl;
+
+        }
+    }
 };
 
 #endif

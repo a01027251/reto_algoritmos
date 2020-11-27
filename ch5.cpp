@@ -88,7 +88,9 @@ int main()
         cout << "lenght: " << vectror_grafos[i].get_nodes().size() << endl;
         cout << endl;
 
-        vectror_grafos[i].print_edge();
+        // vectror_grafos[i].print_edge();
+        vectror_grafos[i].print_conteo();
+
     }
 
     cout<<"¿Es A el vértice que más conexiones salientes hacia la red interna tiene?";
