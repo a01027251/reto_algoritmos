@@ -59,6 +59,27 @@ public:
             nodes[dst].add_to_adj(src);
     };
 
+    void add_edge_generic(T src, T dst)
+    {
+        int cont = 0;
+        int src_idx = 0;
+        int dst_idx = 0;
+        for (int i = 0; i < nodes.size(); i++)
+        {
+            if (src == nodes[i].get_val())
+            {
+                src_idx = i;
+            }  
+
+            if (dst == nodes[i].get_val())
+            {
+                dst_idx = i;
+            }  
+        }
+        nodes[src_idx].add_to_adj(dst_idx);     
+        
+    };
+
     void BFS(int start_vertex)
     {
         std::vector<int> visited;
@@ -160,6 +181,20 @@ public:
         } while (searching.empty() != true);
 
         
+    }
+
+    void print_edge()
+    {
+        for (auto node : nodes)
+        {
+            cout << node.get_val() << " : ";
+            for (auto edge : node.get_adj())
+            {
+                cout << nodes[edge].get_val() << " -> ";
+            }
+            cout << node.get_adj().size();
+            cout << endl;
+        }
     }
 };
 

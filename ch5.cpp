@@ -60,43 +60,67 @@ int main()
         string ipk = registros.All_Registrations[i].ip2;
         int ultimo = ipk.find_last_of(".\\");
         string ipt = ipk.substr(0, ultimo + 1);
-
         //cout << i << endl;
 
         if (a != b)
         {
-            for (auto partes : setFechaIntermitente)
-            {
-
-                vectror_grafos[c].add_node(partes);
-                // cout << partes << "--" << c << endl;
-            }
-
             setFechaIntermitente.clear();
-            // cout << a << "--" << b << "--" << c << endl;
             c++;
         }
-        setFechaIntermitente.insert(ip);
+        if (setFechaIntermitente.find(ip) == setFechaIntermitente.end())
+        {
+            vectror_grafos[c].add_node(ip);
+            setFechaIntermitente.insert(ip);
+        }
 
         if (ipj == ipt)
         {
-
-            setFechaIntermitente.insert(ip2);
-
-            // cout << ipj << "--" << ipt << endl;
+            if (setFechaIntermitente.find(ip) == setFechaIntermitente.end())
+            {
+                vectror_grafos[c].add_node(ip2);
+                setFechaIntermitente.insert(ip2);
+            }
+            vectror_grafos[c].add_edge_generic(ip, ip2);
         }
     }
     for (size_t i = 0; i < vectror_grafos.size(); i++)
     {
-        vector<GraphVertex<string>> vector_ip = vectror_grafos[i].get_nodes();
-
-        for (auto it_vector : vector_ip)
-        {
-            cout << it_vector.get_val() << endl;
-            vectror_grafos[i].add_edge(find(vector_ip.begin(),vector_ip.end(), ), find(vector_ip.begin(),vector_ip.end(),))
-        }   
-        cout << "lenght: " << vector_ip.size() << endl;
+        cout << "lenght: " << vectror_grafos[i].get_nodes().size() << endl;
         cout << endl;
+
+        vectror_grafos[i].print_edge();
     }
 
+    cout<<"¿Es A el vértice que más conexiones salientes hacia la red interna tiene?";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
+
+
+
